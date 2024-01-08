@@ -1,6 +1,6 @@
 {
-  "Name": "TDM",
-  "Description": "Team Death Match. Битва двух команд",
+  "Name": "ASSAULT",
+  "Description": "Режим штурм, красные должны захватить все зоны, синие должны обороняться и не давать захватить зоны",
   "StartClientVersion": 334,
   "MapFilter": {
     "IsBlank": false,
@@ -18,25 +18,20 @@
   "Parameters": {
     "Bool": [
       {
-        "Name": "MapRotation",
-        "DisplayName": "GmParams/MapRotation",
-        "Default": true
+        "Name": "RAmmo",
+        "DisplayName": "Бесконечные патроны штурмующим"
       },
       {
-        "Name": "OnlyKnives",
-        "DisplayName": "GmParams/OnlyKnives"
+        "Name": "BHealt",
+        "DisplayName": "Дополнительные хп обороняющимся"
       },
       {
-        "Name": "PartialDesruction",
-        "DisplayName": "GmParams/PartialDesruction"
+        "Name": "MSGonWin",
+        "DisplayName": "Сообщение о победе"
       },
       {
-        "Name": "LoosenBlocks",
-        "DisplayName": "GmParams/LoosenBlocks"
-      },
-      {
-        "Name": "FriendlyFire",
-        "DisplayName": "GmParams/FriendlyFire"
+        "Name": "BFastBuild",
+        "DisplayName": "Быстрая скорость стройки обороняющимся"
       }
     ]
   }
