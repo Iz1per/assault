@@ -22,16 +22,16 @@
         "DisplayName": "Бесконечные патроны штурмующим"
       },
       {
-        "Name": "BHealt",
-        "DisplayName": "Дополнительные хп обороняющимся"
+        "Name": "Fly",
+        "DisplayName": "Дополнительные хп обороняющимся f"
       },
       {
-        "Name": "MSGonWin",
-        "DisplayName": "Сообщение о победе"
+        "Name": "FloodFill",
+        "DisplayName": "Сообщение о победе ff"
       },
       {
-        "Name": "BFastBuild",
-        "DisplayName": "Быстрая скорость стройки обороняющимся"
+        "Name": "Damage",
+        "DisplayName": "Быстрая скорость стройки обороняющимся d"
       }
     ]
   }
