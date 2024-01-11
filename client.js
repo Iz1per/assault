@@ -155,6 +155,84 @@ plr.Build.QuadChangeEnable.Value = true;
     
 });
 
+///!!!ЗОНЫ!!!///
+var z1 = AreaPlayerTriggerService.Get("Z1Trigger"); 
+z1.Tags = ["z1"]; 
+z1.Enable = true; 
+z1.OnEnter.Add(function(p){ 
+AreaViewService.GetContext(p).Get("z2View").Color = {g:1}; 
+Properties.GetContext(p).Get("check").Value=1;
+}); 
+var z2 = AreaPlayerTriggerService.Get("Z2Trigger"); 
+z2.Tags = ["z2"]; 
+z2.Enable = true; 
+z2.OnEnter.Add(function(p){ 
+if(Properties.GetContext(p).Get("check").Value!==1) 
+p.Spawns.Spawn();
+else{
+AreaViewService.GetContext(p).Get("z3View").Color = {g:1}; 
+Properties.GetContext(p).Get("check").Value++;
+Ui.GetContext().Hint.Value = "Захвачена зона №2!";}
+}); 
+var z3 = AreaPlayerTriggerService.Get("Z3Trigger"); 
+z3.Tags = ["z3"]; 
+z3.Enable = true; 
+z3.OnEnter.Add(function(p){ 
+if(Properties.GetContext(p).Get("check").Value!==2) 
+p.Spawns.Spawn();
+else{
+AreaViewService.GetContext(p).Get("z4View").Color = {g:1}; 
+Properties.GetContext(p).Get("check").Value++;
+Ui.GetContext().Hint.Value = "Захвачена зона №3!"}
+}); 
+var z4 = AreaPlayerTriggerService.Get("Z2Trigger"); 
+z4.Tags = ["z4"]; 
+z4.Enable = true; 
+z4.OnEnter.Add(function(p){ 
+if(Properties.GetContext(p).Get("check").Value!==3) 
+p.Spawns.Spawn();
+else{
+AreaViewService.GetContext(p).Get("z5View").Color = {g:1}; 
+Properties.GetContext(p).Get("check").Value++;
+Ui.GetContext().Hint.Value = "Захвачена зона №4!"}
+});
+var z5 = AreaPlayerTriggerService.Get("Z5Trigger"); 
+z5.Tags = ["z5"]; 
+z5.Enable = true; 
+z5.OnEnter.Add(function(p){ 
+    if(Properties.GetContext(p).Get("check").Value!==4) 
+    p.Spawns.Spawn();
+    else{
+        stateProp.Value = EndOfMatchStateValue;
+        Ui.GetContext().Hint.Value = "Штурмующие выйграли!";
+    
+        var spawns = Spawns.GetContext();
+        spawns.enable = false;
+        spawns.Despawn();
+        Game.GameOver(LeaderBoard.GetTeams());
+        mainTimer.Restart(EndOfMatchTime);}
+});
+var z1View = AreaViewService.GetContext().Get("z1View"); 
+z1View.Color = {g:1}; 
+z1View.Tags = ["z1"]; 
+z1View.Enable = true;
+var z2View = AreaViewService.GetContext().Get("z2View"); 
+z2View.Color = {r:1}; 
+z2View.Tags = ["z2"]; 
+z2View.Enable = true;
+var z3View = AreaViewService.GetContext().Get("z3View"); 
+z3View.Color = {r:1}; 
+z3View.Tags = ["z3"]; 
+z3View.Enable = true;
+var z4View = AreaViewService.GetContext().Get("z4View"); 
+z4View.Color = {r:1}; 
+z4View.Tags = ["z4"]; 
+z4View.Enable = true;
+var z5View = AreaViewService.GetContext().Get("z5View"); 
+z5View.Color = {r:1}; 
+z5View.Tags = ["z5"]; 
+z5View.Enable = true;
+
 // äåëàåì èãðîêîâ íåóÿçâèìûìè ïîñëå ñïàâíà
 var immortalityTimerName="immortality";
 Spawns.GetContext().OnSpawn.Add(function(player){
@@ -304,7 +382,7 @@ function SetGameMode()
 }
 function SetEndOfMatchMode() {
 	stateProp.Value = EndOfMatchStateValue;
-	Ui.GetContext().Hint.Value = "Hint/EndOfMatch";
+	Ui.GetContext().Hint.Value = "Обораняющиеся выйграли!";
 
 	var spawns = Spawns.GetContext();
 	spawns.enable = false;
