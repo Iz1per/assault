@@ -186,6 +186,14 @@ function SetGameMode()
     RD.Ui.Hint.Value = "Захватите все зоны!";
     BD.Ui.Hint.Value = "Не дайте захватить все зоны!";
 
+    BD.inventory.Main.Value = true;
+	BD.inventory.Secondary.Value = true;
+	BD.inventory.Melee.Value = true;
+	BD.inventory.Explosive.Value = true;
+	BD.inventory.Build.Value = true;
+    BD.inventory.BuildInfinity.Value = true;
+
+
 	if (GameMode.Parameters.GetBool("RAmmo")) {
 		RD.inventory.Main.Value = true;
         RD.inventory.MainInfinity.Value = true;
@@ -199,7 +207,7 @@ function SetGameMode()
 		RD.inventory.Secondary.Value = true;
 		RD.inventory.Melee.Value = true;
 		RD.inventory.Explosive.Value = true;
-		RD.Inventory.Build.Value = true;
+		RD.Inventory.Build.Value = false;
 	}
 
     if (GameMode.Parameters.GetBool("BHealth")) {
