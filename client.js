@@ -196,7 +196,13 @@ function SetGameMode()
     if (GameMode.Parameters.GetBool("BHealth")) {
 		BD.contextedProperties.MaxHp.Value = 275;
 	} else {
-        BD.Ui.Hint.Value = ""
+        BD.Ui.Hint.Value = "Не дайте захватить все зоны!"
+	}
+
+    if (GameMode.Parameters.GetBool("SkinZ")) {
+		RD.contextedProperties.SkinType.Value = 1;
+	} else {
+        RD.Ui.Hint.Value = "Захватите все зоны!"
 	}
 
 	mainTimer.Restart(GameModeTime);
