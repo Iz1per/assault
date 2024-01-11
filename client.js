@@ -157,7 +157,7 @@ function SetWaitingMode() {
 function SetBuildMode() 
 {
 	stateProp.Value = BuildModeStateValue;
-	Ui.GetContext().Hint.Value = "Защищайте зоны";
+	BD.Ui.Hint.Value = "Защищайте зоны";
 	var RD = Teams.Get("Red");
 	RD.inventory.Main.Value = false;
 	RD.inventory.Secondary.Value = false;
@@ -191,6 +191,12 @@ function SetGameMode()
 		RD.inventory.Melee.Value = true;
 		RD.inventory.Explosive.Value = true;
 		RD.Inventory.Build.Value = true;
+	}
+
+    if (GameMode.Parameters.GetBool("BHealth")) {
+		BD.contextedProperties.MaxHp.Value = 275;
+	} else {
+        BD.Ui.Hint.Value = ""
 	}
 
 	mainTimer.Restart(GameModeTime);
