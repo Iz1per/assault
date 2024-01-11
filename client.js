@@ -1,5 +1,5 @@
 //статы времени
-var WaitingPlayersTime = 10;
+var WaitingPlayersTime = 5;
 var BuildBaseTime = 60;
 var GameModeTime = 420;
 var EndOfMatchTime = 10;
@@ -27,8 +27,8 @@ Properties.GetContext().GameModeName.Value = "GameModes/Team Dead Match";
 TeamsBalancer.IsAutoBalance = true;
 Ui.GetContext().MainTimerId.Value = mainTimer.Id;
 // ñîçäàåì êîìàíäû
-Teams.Add("Blue", "Обороняющиеся", { b: 1 });
-Teams.Add("Red", "Штурмующие", { r: 1 });
+Teams.Add("Blue", "Обороняющиеся", { r: 40, g: 37, b: 155 });
+Teams.Add("Red", "Штурмующие", { r: 193, g: 54, b: 54  });
 var BD = Teams.Get("Blue");
 var RD = Teams.Get("Red");
 BD.Spawns.SpawnPointsGroups.Add(1);
@@ -149,7 +149,7 @@ SetWaitingMode();
 // ñîñòîÿíèÿ èãðû
 function SetWaitingMode() {
 	stateProp.Value = WaitingStateValue;
-	Ui.GetContext().Hint.Value = "Ожидание игроков...";
+	Ui.GetContext().Hint.Value = "Ждем игроков";
 	Spawns.GetContext().enable = false;
 	mainTimer.Restart(WaitingPlayersTime);
 }
@@ -157,13 +157,13 @@ function SetWaitingMode() {
 function SetBuildMode() 
 {
 	stateProp.Value = BuildModeStateValue;
-	Ui.GetContext().Hint.Value = "Hint/BuildBase";
-	var inventory = Inventory.GetContext();
-	inventory.Main.Value = false;
-	inventory.Secondary.Value = false;
-	inventory.Melee.Value = true;
-	inventory.Explosive.Value = false;
-	inventory.Build.Value = true;
+	Ui.GetContext().Hint.Value = "Защищайте зоны";
+	var RD = Teams.Get("Red");
+	RD.inventory.Main.Value = false;
+	RD.inventory.Secondary.Value = false;
+	RD.inventory.Melee.Value = false;
+	RD.inventory.Explosive.Value = false;
+	RD.inventory.Build.Value = false;
 
 	mainTimer.Restart(BuildBaseTime);
 	Spawns.GetContext().enable = true;
@@ -172,9 +172,11 @@ function SetBuildMode()
 function SetGameMode() 
 {
 	stateProp.Value = GameStateValue;
-	Ui.GetContext().Hint.Value = "Hint/AttackEnemies";
+	var RD = Teams.Get("Red");
+    var BD = Teams.Get("Blue");
+    RD.Ui.Hint.Value = "Захватите все зоны!";
+    BD.Ui.Hint.Value = "Не дайте захватить все зоны!";
 
-	var inventory = Inventory.GetContext();
 	if (GameMode.Parameters.GetBool("RAmmo")) {
 		RD.inventory.Main.Value = true;
         RD.inventory.MainInfinity.Value = true;
@@ -184,11 +186,11 @@ function SetGameMode()
 		RD.inventory.Explosive.Value = true;
 		RD.inventory.Build.Value = false;
 	} else {
-		inventory.Main.Value = true;
-		inventory.Secondary.Value = true;
-		inventory.Melee.Value = true;
-		inventory.Explosive.Value = true;
-		inventory.Build.Value = true;
+		RD.inventory.Main.Value = true;
+		RD.inventory.Secondary.Value = true;
+		RD.inventory.Melee.Value = true;
+		RD.inventory.Explosive.Value = true;
+		RD.Inventory.Build.Value = true;
 	}
 
 	mainTimer.Restart(GameModeTime);
@@ -215,4 +217,3 @@ function SpawnTeams() {
 		Spawns.GetContext(e.Current).Spawn();
 	}
 }
-
