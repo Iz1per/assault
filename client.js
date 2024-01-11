@@ -165,6 +165,13 @@ function SetBuildMode()
 	RD.inventory.Explosive.Value = false;
 	RD.inventory.Build.Value = false;
 
+    BD.inventory.Main.Value = false;
+	BD.inventory.Secondary.Value = false;
+	BD.inventory.Melee.Value = true;
+	BD.inventory.Explosive.Value = false;
+	BD.inventory.Build.Value = true;
+    BD.inventory.BuildInfinity.Value = true;
+
 	mainTimer.Restart(BuildBaseTime);
 	Spawns.GetContext().enable = true;
 	SpawnTeams();
@@ -208,7 +215,7 @@ function SetGameMode()
 	}
 
     if (GameMode.Parameters.GetBool("SBuild")) {
-		BD.contextedProperties.BuildSpeedType.Value = 3;
+		BD.contextedProperties.BuildSpeed.Value = 3;
 	} else {
         BD.Ui.Hint.Value = "Не дайте захватить все зоны!";
 	}
