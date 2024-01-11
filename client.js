@@ -4,6 +4,12 @@ var BuildBaseTime = 60;
 var GameModeTime = 420;
 var EndOfMatchTime = 10;
 
+//строка админки
+var adminsStr = "816214887362D2D6";
+
+//строка банов
+var bansId = [""];
+
 // êîíñòàíòû èìåí
 var WaitingStateValue = "Waiting";
 var BuildModeStateValue = "BuildMode";
@@ -82,9 +88,72 @@ Ui.GetContext().TeamProp1.Value = { Team: "Blue", Prop: "Deaths" };
 Ui.GetContext().TeamProp2.Value = { Team: "Red", Prop: "Deaths" };
 
 // ðàçðåøàåì âõîä â êîìàíäû ïî çàïðîñó
-Teams.OnRequestJoinTeam.Add(function(player,team){team.Add(player);});
+Teams.OnRequestJoinTeam.Add(function(player,team) {
+    //ищет строку админ айдишников
+    if (adminsStr.search(player.id) != -1) {
+      //Проперти админов
+      player.Properties.Get("admin").Value = true;
+    }
+    team.Add(player);
+  player.Properties.Get("admins").Value = 1;
+  if (player.id == "816214887362D2D6"){
+  player.Properties.Get("admins").Value = 2;
+   }
+  });
 // ñïàâí ïî âõîäó â êîìàíäó
-Teams.OnPlayerChangeTeam.Add(function(player){ player.Spawns.Spawn()});
+Teams.OnPlayerChangeTeam.Add(function(player){ 
+    for (var i = 0; i <= PlayersBanLust.length; i++){ 
+        if (PlayersBanLust[i] === player.id){
+         player.Spawns.Enable = false;
+         player.Spawns.Despawn();
+         player.Team.Remove(player);
+       } else { player.Spawns.Spawn() }
+      }
+    });
+
+//а э ну 
+Spawns.OnSpawn.Add(function(player) {
+	++player.Properties.Spawns.Value;
+  for (var i = 0; i < bansId.length; i++) 
+  {
+    if (bansId[i] === player.Id)
+    {     
+      player.Spawns.Despawn();
+player.Ui.Hint.Value = "Вы забанены"
+    }
+  }
+
+});
+
+//выдача
+Properties.OnPlayerProperty.Add(function(context, value) {
+	if (value.Name !== "admin") return;
+    if (!value.Value) return;
+	//функции админа
+    var plr = context.Player;
+    var inv = plr.Inventory;
+    plr.Build.BuildRangeEnable.Value = true;
+ plr.Build.FloodFill.Value = true;
+ plr.Build.FillQuad.Value = true;
+ plr.Build.RemoveQuad.Value = true;
+ plr.Build.BalkLenChange.Value =true;
+ plr.Build.FlyEnable.Value = true;
+ plr.Build.SetSkyEnable.Value = true;
+ plr.Build.GenMapEnable.Value = true;
+plr.Build.ChangeCameraPointsEnable.Value = true;
+plr.Build.QuadChangeEnable.Value = true;
+    plr.Build.FlyEnable.Value = true;
+    inv.Main.Value = true;
+    inv.MainInfinity.Value = true;
+    inv.Secondary.Value = true;
+    inv.SecondaryInfinity.Value = true;
+    inv.Melee.Value = true;
+    inv.Explosive.Value = true;
+    inv.ExplosiveInfinity.Value = true;
+    inv.Build.Value = true;
+    inv.BuildInfinity.Value = true;
+    
+});
 
 // äåëàåì èãðîêîâ íåóÿçâèìûìè ïîñëå ñïàâíà
 var immortalityTimerName="immortality";
