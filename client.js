@@ -169,7 +169,7 @@ function SetBuildMode()
 	Spawns.GetContext().enable = true;
 	SpawnTeams();
 
-    if (GameMode.Parameters.GetBool("BHealth")) {
+    if (GameMode.Parameters.GetBool("SBuild")) {
 		BD.contextedProperties.BuildSpeedTypes.Value = 3;
 	} else {
         BD.Ui.Hint.Value = "Защищайте зоны";
