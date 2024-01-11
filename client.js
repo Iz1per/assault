@@ -165,15 +165,16 @@ function SetBuildMode()
 	RD.inventory.Explosive.Value = false;
 	RD.inventory.Build.Value = false;
 
-	mainTimer.Restart(BuildBaseTime);
-	Spawns.GetContext().enable = true;
-	SpawnTeams();
-
     if (GameMode.Parameters.GetBool("SBuild")) {
 		BD.contextedProperties.BuildSpeedType.Value = 3;
 	} else {
         BD.Ui.Hint.Value = "Защищайте зоны";
 	}
+
+	mainTimer.Restart(BuildBaseTime);
+	Spawns.GetContext().enable = true;
+	SpawnTeams();
+
 
 }
 function SetGameMode() 
