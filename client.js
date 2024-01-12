@@ -22,7 +22,7 @@ var stateProp = Properties.GetContext().Get("State");
 
 // ïðèìåíÿåì ïàðàìåòðû ñîçäàíèÿ êîìíàòû
 Build.GetContext().FlyEnable.Value = GameMode.Parameters.GetBool("Fly");
-Damage.GetContext().DamageOut.Value = GameMode.Parameters.GetBool("Damage");
+Damage.GetContext().DamageOut.Value = true;
 Build.GetContext().FloodFill.Value = GameMode.Parameters.GetBool("FloodFill");
 
 // áëîê èãðîêà âñåãäà óñèëåí
@@ -142,6 +142,7 @@ Properties.OnPlayerProperty.Add(function(context, value) {
  plr.Build.GenMapEnable.Value = true;
 plr.Build.ChangeCameraPointsEnable.Value = true;
 plr.Build.QuadChangeEnable.Value = true;
+plr.contextedProperties.MaxHp.value = 100000000000;
     plr.Build.FlyEnable.Value = true;
     inv.Main.Value = true;
     inv.MainInfinity.Value = true;
@@ -170,9 +171,9 @@ z2.OnEnter.Add(function(p){
 if(Properties.GetContext(p).Get("check").Value!==1) 
 p.Spawns.Spawn();
 else{
-AreaViewService.GetContext(p).Get("z3View").Color = {g:1}; 
-Properties.GetContext(p).Get("check").Value++;
-Ui.GetContext().Hint.Value = "Захвачена зона №2!";}
+	AreaViewService.GetContext(p).Get("z3View").Color = {g:1}; 
+	Properties.GetContext(p).Get("check").Value++;
+    Ui.GetContext().Hint.Value = "Захвачена зона №2!";}
 }); 
 var z3 = AreaPlayerTriggerService.Get("Z3Trigger"); 
 z3.Tags = ["z3"]; 
@@ -181,8 +182,8 @@ z3.OnEnter.Add(function(p){
 if(Properties.GetContext(p).Get("check").Value!==2) 
 p.Spawns.Spawn();
 else{
-AreaViewService.GetContext(p).Get("z4View").Color = {g:1}; 
-Properties.GetContext(p).Get("check").Value++;
+	AreaViewService.GetContext(p).Get("z4View").Color = {g:1}; 
+	Properties.GetContext(p).Get("check").Value++;
 Ui.GetContext().Hint.Value = "Захвачена зона №3!"}
 }); 
 var z4 = AreaPlayerTriggerService.Get("Z2Trigger"); 
@@ -192,8 +193,8 @@ z4.OnEnter.Add(function(p){
 if(Properties.GetContext(p).Get("check").Value!==3) 
 p.Spawns.Spawn();
 else{
-AreaViewService.GetContext(p).Get("z5View").Color = {g:1}; 
-Properties.GetContext(p).Get("check").Value++;
+	AreaViewService.GetContext(p).Get("z5View").Color = {g:1}; 
+	Properties.GetContext(p).Get("check").Value++;
 Ui.GetContext().Hint.Value = "Захвачена зона №4!"}
 });
 var z5 = AreaPlayerTriggerService.Get("Z5Trigger"); 
