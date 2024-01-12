@@ -171,8 +171,8 @@ z2.OnEnter.Add(function(p){
 if(Properties.GetContext(p).Get("check").Value!==1) 
 p.Spawns.Spawn();
 else{
-	AreaViewService.GetContext(p).Get("z3View").Color = {g:1}; 
 	Properties.GetContext(p).Get("check").Value++;
+	AreaViewService.GetContext(p).Get("z3View").Color = {g:1};
     Ui.GetContext().Hint.Value = "Захвачена зона №2!";}
 }); 
 var z3 = AreaPlayerTriggerService.Get("Z3Trigger"); 
